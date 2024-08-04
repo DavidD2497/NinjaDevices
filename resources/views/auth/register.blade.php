@@ -40,7 +40,7 @@
 
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Registrar') }}
+                                    {{ __('Registrarme') }}
                                 </button>
                             </div>
                         </form>

@@ -7,7 +7,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('/') || Request::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Inicio</a>
                 </li>
@@ -29,22 +29,25 @@
                 <a href="{{ route('login') }}" class="btn btn-light btnLogin ms-2">Login</a>
                 <a href="{{ route('register') }}" class="btn btn-light btnLogin ms-2">Registrarme</a>
             @else
-                <!-- Mostrar bienvenida y botón de logout -->
                 <div class="dropdown ms-2">
                     <button class="btn btn-light btnLogin dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="{{ route('carrito.mostrar') }}">Ver carrito 🛒</a></li>
                         @if (Auth::user()->isAdmin())
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{{ route('admin.usuarios') }}">Panel Usuarios</a></li>
                             <li><a class="dropdown-item" href="{{ route('admin.categorias') }}">Panel Categorias</a></li>
-                            <li><hr class="dropdown-divider"></li>
                         @endif
-                        <li><form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="dropdown-item">Logout</button>
-                        </form></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item">Logout</button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
             @endguest
@@ -52,6 +55,8 @@
         </div>
     </div>
 </nav>
+
+
 
 
 

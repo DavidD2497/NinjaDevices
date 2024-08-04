@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\OrdenController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -97,6 +98,15 @@ Route::get('/contacto', function () {
 Route::post('/contacto', [FormularioController::class, 'store'])->name('contacto.store');
 
 Route::get('/productos/{categoria}', [ProductoController::class, 'index'])->name('productos.index');
+
+
+Route::post('/carrito/agregar/{id}', [OrdenController::class, 'agregarAlCarrito'])->name('carrito.agregar');
+Route::get('/carrito', [OrdenController::class, 'mostrarCarrito'])->name('carrito.mostrar');
+Route::post('/carrito/remover/{id}', [OrdenController::class, 'removerDelCarrito'])->name('carrito.remover');
+Route::post('/carrito/actualizar/{id}', [OrdenController::class, 'actualizarCantidad'])->name('carrito.actualizar');
+Route::post('/carrito/finalizar', [OrdenController::class, 'finalizarCompra'])->name('carrito.finalizar');
+
+
 
 // Incluye el archivo de rutas de autenticación
 require __DIR__ . '/auth.php';

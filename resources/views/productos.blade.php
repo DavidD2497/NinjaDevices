@@ -2,7 +2,7 @@
 
 @section('content')
     <main class="container text-center mb-5 mt-3">
-        <h1><a href="{{ route('componentes') }}" class='text-decoration-none categ'>Categorías</a> »{{ $categoria->categoria }}</h1>
+        <h1><a href="{{ route('componentes') }}" class='text-decoration-none categ'>Categorías</a> » {{ $categoria->categoria }}</h1>
         <div class="container">
         <div class="row row-cols-1 row-cols-md-3 g-3 justify-content-center">
             @foreach ($productos as $producto)
@@ -13,6 +13,10 @@
                             <h2>{{ $producto->nombreProducto }}</h2>
                             <p class="precio">$ {{ $producto->precioProducto }}</p>
                             <p class="descripcion">{{ $producto->descripcionProducto }}</p>
+                            <form action="{{ route('carrito.agregar', $producto->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Añadir al carrito 🛒</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -20,7 +24,14 @@
         </div>
         </div>
     </main>
+
+    @if(session('success'))
+        <div class="alert alert-success text-center mt-3">
+            {{ session('success') }}
+        </div>
+    @endif
 @endsection
+
 
 
 
